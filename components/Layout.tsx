@@ -1,16 +1,18 @@
 import { type ReactNode } from "react";
 import { Header } from "./Header";
 import { MetaHead } from "./MetaHead";
+import { Navigation } from "./Navigation";
+import { Footer } from "./Footer";
 
 export const Layout = ({ title, children }: LayoutProps) => {
   return (
-    <>
+    <main className="container">
       <MetaHead title={title} />
+      <Navigation />
       <Header title={title} />
-      <main className="max-w-xl w-full flex items-center flex-col justify-start max-h-fit space-y-2 my-5 mx-auto">
-        {children}
-      </main>
-    </>
+      <section className="container">{children}</section>
+      <Footer />
+    </main>
   );
 };
 

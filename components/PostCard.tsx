@@ -11,25 +11,41 @@ export const PostCard = ({
   slug,
 }: PostCardProps) => {
   return (
-    <Link href={`/${slug}`}>
-      <a className="cursor-pointer flex justify-between">
-        <article className="space-y-3">
-          <h2 className="font-bold text-2xl">{title}</h2>
-          <p className="px-3">{summary}</p>
-          <ul className="flex space-x-3">
-            {tags.map((tag, idx) => (
-              <li key={tag + idx}>
-                <Badge label={tag} />
-              </li>
-            ))}
+    <article>
+      <header>
+        <Link href={`/${slug}`}>
+          <a role="article">
+            <h2>{title}</h2>
+          </a>
+        </Link>
+      </header>
+      <p>{summary}</p>
+      <footer>
+        <nav>
+          <ul>
+            <nav aria-label="breadcrumb">
+              <ul>
+                {tags.map((tag, idx) => (
+                  <li key={tag + idx}>
+                    <Badge label={tag} />
+                  </li>
+                ))}
+              </ul>
+            </nav>
           </ul>
-        </article>
-        <aside className="self-end">
-          <p className="font-semibold">{author}</p>
-          <p>{createdAt === updatedAt ? createdAt : updatedAt}</p>
-        </aside>
-      </a>
-    </Link>
+          <ul>
+            <aside>
+              <nav>
+                <ul>
+                  <li>{author}</li>
+                  <li>{createdAt === updatedAt ? createdAt : updatedAt}</li>
+                </ul>
+              </nav>
+            </aside>
+          </ul>
+        </nav>
+      </footer>
+    </article>
   );
 };
 

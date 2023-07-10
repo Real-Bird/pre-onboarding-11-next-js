@@ -48,11 +48,11 @@ export default Input;
 
 **Remember**, I want to be _a reasonable developer_, not ~~the greatest one~~.
 
-| TO DO      |      Descriptions      |
-| :--------- | :--------------------: |
-| React      | Library for web fe dev |
-| Next.js    |        the same        |
-| TypeScript |       I Love it!       |
-| CSS        |        Oh shit!        |
-| Vue        |      I don't know      |
-| BackEnd    |     What the F...?     |
+| TO DO      |                  Descriptions                  |
+| :--------- | :--------------------------------------------: |
+| React      |             Library for web fe dev             |
+| Next.js    | ~the same~ That's none-no. It's the Framework! |
+| TypeScript |                   I Love it!                   |
+| CSS        |                    Oh shit!                    |
+| Vue        |                  I don't know                  |
+| BackEnd    |                 What the F...?                 |

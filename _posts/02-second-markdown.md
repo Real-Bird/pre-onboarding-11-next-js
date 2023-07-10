@@ -11,7 +11,7 @@ createdAt: 2023.07.10
 updatedAt: 2023.07.10
 ---
 
-# Markdown 문법 안내
+# Markdown 문법 테스트
 
 ## 제목
 
@@ -128,42 +128,98 @@ updatedAt: 2023.07.10
 - 백틱 6개로 감싸고, 적용할 언어를 적어 생성합니다.
 
 ````
- 	```python
-    a = b = 10
-    c = a + b
-    print(c) # 20
+ 	```js
+    const a = 10,
+    b = 10;
+    const c = a + b;
+    console.log(c); // 20
 	```
 ````
 
 **ex**
 
-```python
-a = b = 10
-c = a + b
-print(c) # 20
+- javascript(js)
+
+```js
+const a = 10,
+  b = 10;
+const c = a + b;
+console.log(c); // 20
+```
+
+- html
+
+```html
+<h1>HI</h1>
+```
+
+- css
+
+```css
+body {
+  background-color: black;
+}
+```
+
+- jsx
+
+```jsx
+function Component() {
+  return <h1>Hi</h1>;
+}
+```
+
+- typescript(ts)
+
+```ts
+type A = string;
+
+let a: A = "abc";
+```
+
+- tsx
+
+```jsx
+interface Props {
+  children: ReactNode;
+}
+
+function Component({ children }: Props) {
+  return <h1>{children}</h1>;
+}
+```
+
+- diff
+
+```diff
+function Component({children}:Props) {
+-  return <h1>{children}</h1>
++  return <Layout>{children}</Layout>
+}
+```
+
+- json
+
+```json
+{
+  "scripts": {
+    "dev": "next dev"
+  }
+}
 ```
 
 - 선언 가능한 언어는 다음과 같습니다.
 
 | 언어 이름  | 작성 방식  |
 | :--------: | :--------: |
-|    Bash    |    bash    |
-|     C      |     c      |
-|     C#     |     cs     |
-|    C++     |    cpp     |
+|    HTML    |    html    |
 |    CSS     |    css     |
-|    Diff    |    diff    |
-| HTML, XML  |    html    |
-|    HTTP    |    http    |
-|    Ini     |    ini     |
-|    JSON    |    json    |
-|    Java    |    java    |
 | JavaScript | javascript |
-|    PHP     |    php     |
-|    Perl    |    perl    |
-|   Python   |   python   |
-|    Ruby    |    ruby    |
-|    SQL     |    sql     |
+|    JSX     |    jsx     |
+| TypeScript | typescript |
+|    TSX     |    tsx     |
+|    Diff    |    diff    |
+|    JSON    |    json    |
 
 ## 구분선
 

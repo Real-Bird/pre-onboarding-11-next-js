@@ -6,16 +6,13 @@ import { Layout, PostCard } from "../components";
 const Home: NextPage<{ posts: IPost[] }> = ({ posts }) => {
   return (
     <Layout title="HOME">
-      <ul className="w-full space-y-2">
+      <section className="grid">
         {posts.map((post) => (
-          <li
-            key={post.no}
-            className="w-full px-3 py-1 border-2 border-black rounded-lg shadow-md active:shadow-none shadow-slate-600 hover:bg-gray-100 even:bg-gray-300 even:hover:bg-gray-100"
-          >
+          <div key={post.no}>
             <PostCard {...post} />
-          </li>
+          </div>
         ))}
-      </ul>
+      </section>
     </Layout>
   );
 };
