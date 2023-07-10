@@ -1,34 +1,79 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Next.js로 마크다운 블로그 만들기 - 원티드 프리온보딩 FE 챌린지 7월
 
-## Getting Started
+## 1. 최종 구현 화면
+### 1-1. Home
+![1-next-blog-home](https://github.com/Real-Bird/pre-onboarding-11-next-js/assets/83404864/94129966-a152-40d4-8e8e-34b87eb90bee)
 
-First, run the development server:
+### 1-2. Post
+![1-next-blog-post](https://github.com/Real-Bird/pre-onboarding-11-next-js/assets/83404864/faa8b3b8-407b-421e-8ca5-0f5b7b07a5b8)
 
-```bash
-npm run dev
-# or
-yarn dev
+## 2. Demo
+
+https://main--delicate-hotteok-d21631.netlify.app/
+
+## 3. 구현 요구 사항 목록
+
+- [x] 사용자는 루트 경로의 __posts 폴더에 마크다운 파일(.md)을 작성할 수 있어야 한다
+
+다음과 같은 폴더 구조로 마크다운 파일을 생성했습니다.
+```
+- _posts/
+  - 1.md
+  - 2.md
+  ...
+```
+- [x] 해당 파일은 마크다운 본문과 게시물에 대한 meta data를 담을 수 있어야 한다
+
+마크다운 파일마다 `frontmatter`를 작성하여 meta data를 구성했습니다.
+
+```yml
+---
+no: 01
+title: first markdown post
+author: Real-Bird
+summary: my first markdown post!
+tags:
+  - markdown
+  - blog
+  - post
+createdAt: 2023.07.09
+updatedAt: 2023.07.09
+---
+```
+- [x] 블로그에 작성된 게시물을 렌더링하는 `목록 페이지`와 개별 게시물을 렌더링하는 `상세 페이지`로 나누어 작성한다
+    - `/` - 목록 페이지
+    - `/[id]` - 상세 페이지
+
+Next.js의 페이지 라우팅을 이용해 목록 페이지는 `index.tsx`에, 상세 페이지는 `[slug].tsx`에 작성했습니다. 파일명으로 `pathname`을 구성했습니다.
+
+- [x] Next.js 12에서 지원하는 Prefetching 메서드를 적절히 사용한다
+
+`getStaticProps`를 이용하여 마크다운 파일을 읽어 왔습니다.
+
+```tsx
+export const getStaticProps: GetStaticProps = async () => {
+  const blogPosts = readdirSync("_posts").map((file) => {
+    const content = readFileSync(`_posts/${file}`, "utf-8");
+    const [slug, _] = file.split(".");
+    return { ...matter(content).data, slug };
+  });
+  return {
+    props: { posts: blogPosts.reverse() },
+  };
+};
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+상세 페이지 경로는 `getStaticPaths`에서 처리하였습니다.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```tsx
+export const getStaticPaths: GetStaticPaths = async () => {
+  const files = readdirSync("_posts").map((file) => {
+    const [name, _] = file.split(".");
+    return { params: { slug: name } };
+  });
+  return {
+    paths: files,
+    fallback: false,
+  };
+};
+```
